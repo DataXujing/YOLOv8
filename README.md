@@ -325,7 +325,25 @@ model = YOLO("./runs/detect/train/weights/last.pt ")  # load a pretrained YOLOv8
 model.export(format="onnx")  # export the model to ONNX format
 ```
 
-2. 增加NMS Plugin
+2. 增加NMS Plugin 
+
+执行`tensorrt/`下的如下代码，添加NMS到YOLOv8模型
+
++ 添加后处理
+
+```shell
+python3 yolov8_add_postprocess.py
+```
+
++ 添加NMS plugin
+
+```shell
+python3 yolov8_add_nms.py
+```
+
+生成`last_1_nms.onnx`,打开该文件对比和原onnx文件的区别，发现增加了如下节点(完成了将NMS添加到onnx的目的）：
+
+![](docs/nms.png)
 
 
 
@@ -334,12 +352,12 @@ model.export(format="onnx")  # export the model to ONNX format
 3. onnx转trt engine
 
 ```shell
-trtexec --onnx=last.onnx --saveEngine=last.plan --workspace=3000 --verbose
+trtexec --onnx=last_1_nms.onnx --saveEngine=yolov8s.plan --workspace=3000 --verbose
 ```
 
+![](docs/trt.png)
 
-
-
+出现上述界面，onnx正常序列化为TRT engine.
 
 4. TRT C++推断
 
