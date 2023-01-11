@@ -290,16 +290,28 @@ class Exporter:
             elif isinstance(self.model, DetectionModel):
                 dynamic['output0'] = {0: 'batch', 1: 'anchors'}  # shape(1,25200,85)
 
+        print("============================1")
+        # torch.onnx.export(
+        #     self.model.cpu() if dynamic else self.model,  # --dynamic only compatible with cpu
+        #     self.im.cpu() if dynamic else self.im,
+        #     f,
+        #     verbose=True,
+        #     opset_version=self.args.opset,
+        #     do_constant_folding=True,  # WARNING: DNN inference with torch>=1.12 may require do_constant_folding=False
+        #     input_names=['images'],
+        #     output_names=output_names,
+        #     dynamic_axes=dynamic or None)
         torch.onnx.export(
             self.model.cpu() if dynamic else self.model,  # --dynamic only compatible with cpu
             self.im.cpu() if dynamic else self.im,
             f,
-            verbose=False,
+            verbose=True,
             opset_version=self.args.opset,
-            do_constant_folding=True,  # WARNING: DNN inference with torch>=1.12 may require do_constant_folding=False
+            do_constant_folding=False,  # WARNING: DNN inference with torch>=1.12 may require do_constant_folding=False
             input_names=['images'],
             output_names=output_names,
             dynamic_axes=dynamic or None)
+
 
         # Checks
         model_onnx = onnx.load(f)  # load onnx model

@@ -293,23 +293,89 @@ optimizer: 'SGD' # optimizer to use, choices=['SGD', 'Adam', 'AdamW', 'RMSProp']
 yolo task=detect mode=train model=yolov8s.yaml  data=score_data.yaml epochs=100 batch=64 imgsz=640 pretrained=False optimizer=SGD 
 ```
 
+![](docs/train_log1.png)
 
+![](docs/PR_curve.png)
 
 ### 8.YOLOv8推断Demo
+
+```shell
+# 自己实现的推断程序
+python3 inference.py
+```
+
+| ![](docs/bus.jpg)  | ![](docs/cat1.jpg)   |
+| ------------------ | -------------------- |
+| ![](docs/dog1.jpg) | ![](docs/zidane.jpg) |
 
 
 
 ### 9.YOLOv8端到端模TensorRT模型加速
 
+1. pth模型转onnx
+
+```shell
+#CLI
+yolo task=detect mode=export model=./runs/detect/train/weights/last.pt format=onnx simplify=True opset=13
+
+# python
+from ultralytics import YOLO
+
+model = YOLO("./runs/detect/train/weights/last.pt ")  # load a pretrained YOLOv8n model
+model.export(format="onnx")  # export the model to ONNX format
+```
+
+2. 增加NMS Plugin
+
+
+
+
+
+3. onnx转trt engine
+
+```shell
+trtexec --onnx=last.onnx --saveEngine=last.plan --workspace=3000 --verbose
+```
+
+
+
+
+
+4. TRT C++推断
+
+
+
+
+
 
 
 ### 9.YOLOv8端到端华为昇腾模型推断加速
+
+1. pth转onnx
+
+
+
+2. 增加onnx NMS算子结点
+
+
+
+3. ATC转.om模型
+
+
+
+4. 华为昇腾C++推断
+
+
+
+
 
 
 
 
 
 ### 参考文献：
+
++ https://github.com/ultralytics/ultralytics
 
 + https://mp.weixin.qq.com/s/_OvSTQZlb5jKti0JnIy0tQ
 + https://github.com/ultralytics/assets/releases
