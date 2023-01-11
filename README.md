@@ -357,39 +357,27 @@ trtexec --onnx=last_1_nms.onnx --saveEngine=yolov8s.plan --workspace=3000 --verb
 
 4. TRT C++推断
 
-在win 10下基于RTX 1060 TensorRT 8.2.1进行测试，我们的开发环境是VS2017,所有C++代码已经存放在`tensorrt/`文件夹下。其推断结果如下图所示（可以发现我们实现了YOLOv8的TensorRT端到端的推断，其推断结果与原训练框架保持一致）：
+在win 10下基于RTX 1060 TensorRT 8.2.1进行测试，我们的开发环境是VS2017,**所有C++代码已经存放在`tensorrt/`文件夹下**。其推断结果如下图所示（可以发现我们实现了YOLOv8的TensorRT端到端的推断，其推断结果与原训练框架保持一致）：
 
-
+| ![](tensorrt/yolov8/yolov8/res/bus.jpg)  | ![](tensorrt/yolov8/yolov8/res/cat1.jpg)   |
+| ---------------------------------------- | ------------------------------------------ |
+| ![](tensorrt/yolov8/yolov8/res/dog1.jpg) | ![](tensorrt/yolov8/yolov8/res/zidane.jpg) |
 
 
 
 ### 9.YOLOv8端到端华为昇腾模型推断加速
 
+> 由于其他原因，该部分代码不开源。
+
 这一部分我们将在华为昇腾下测试如何端到端实现YOLOv8的推断，华为昇腾目前支持的算子还是很有限的，onnx的NMS算子华为昇腾是支持的，因此我们需要将onnx的NMS算子添加到YOLOv8的onnx文件中，并将模型转化到昇腾架构下运行。这部分代码我们存放在`Ascend/`下。
 
 1. pth转onnx
 
-该过程和TensorRT部分完全相同。
-
 2. 增加onnx NMS算子结点
-
-
-
-
 
 3. ATC转.om模型
 
-
-
 4. 华为昇腾C++推断
-
-
-
-
-
-
-
-
 
 ### 参考文献：
 

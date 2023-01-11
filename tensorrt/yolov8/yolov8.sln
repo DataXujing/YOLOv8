@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1169
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yolov8", "yolov8\yolov8.vcxproj", "{4898203C-0C0B-4BC0-9597-6F143C06EDCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Debug|x64.ActiveCfg = Debug|x64
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Debug|x64.Build.0 = Debug|x64
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Debug|x86.ActiveCfg = Debug|Win32
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Debug|x86.Build.0 = Debug|Win32
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Release|x64.ActiveCfg = Release|x64
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Release|x64.Build.0 = Release|x64
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Release|x86.ActiveCfg = Release|Win32
+		{4898203C-0C0B-4BC0-9597-6F143C06EDCA}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3DF27D24-2492-49DB-B151-3AE684C89B43}
+	EndGlobalSection
+EndGlobal
