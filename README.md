@@ -28,8 +28,8 @@
 
 + YOLOv8 Github: https://github.com/ultralytics/ultralytics
 
-+ YOLOv8的权重：**https://github.com/ultralytics/assets/releases**
-+ YOLOv8文档： **https://v8docs.ultralytics.com/**
++ ~~YOLOv8的权重：https://github.com/ultralytics/assets/releases~~
++ YOLOv8文档： https://v8docs.ultralytics.com/
 + ~~YOLOv8 Python package源码库：https://test.pypi.org/simple/ultralytics/~~
 
 
@@ -57,7 +57,7 @@
 2. **PAN-FPN**：毫无疑问YOLOv8依旧使用了PAN的思想，不过通过对比YOLOv5与YOLOv8的结构图可以看到，YOLOv8将YOLOv5中PAN-FPN上采样阶段中的卷积结构删除了，同时也将C3模块替换为了C2f模块；
 3. **Decoupled-Head**：是不是嗅到了不一样的味道？是的，YOLOv8走向了Decoupled-Head；
 4. **Anchor-Free**：YOLOv8抛弃了以往的Anchor-Base，使用了**Anchor-Free**的思想；
-5. **损失函数**：YOLOv8使用和Yolov5一样的BCE loss
+5. **损失函数**：YOLOv8使用VFL Loss作为分类损失，使用DFL Loss+CIOU Loss作为分类损失；
 6. **样本匹配**：YOLOv8抛弃了以往的IOU匹配或者单边比例的分配方式，而是使用了Task-Aligned Assigner匹配方式。
 
 + **SPP Vs SPPF:**
@@ -151,7 +151,21 @@ YOLOv8的结构图：
 
 + **损失函数**
 
-对于分类损失，其用的是YOLOv5一样的BCE。
+对于YOLOv8，其分类损失为VFL Loss，其回归损失为CIOU Loss+DFL的形式，这里Reg_max默认为16。
+
+VFL主要改进是提出了非对称的加权操作，FL和QFL都是对称的。而非对称加权的思想来源于论文PISA，该论文指出首先正负样本有不平衡问题，即使在正样本中也存在不等权问题，因为mAP的计算是主正样本。
+
+![](docs/loss.png)
+
+
+
+q是label，正样本时候q为bbox和gt的IoU，负样本时候q=0，当为正样本时候其实没有采用FL，而是普通的BCE，只不过多了一个自适应IoU加权，用于突出主样本。而为负样本时候就是标准的FL了。可以明显发现VFL比QFL更加简单，主要特点是正负样本非对称加权、突出正样本为主样本。
+
+针对这里的DFL（Distribution Focal Loss），其主要是将框的位置建模成一个 general distribution，让网络快速的聚焦于和目标位置距离近的位置的分布。
+
+
+
+
 
 + **正负样本的匹配**
 
