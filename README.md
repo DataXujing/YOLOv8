@@ -1,4 +1,4 @@
-##  Official YOLOv8 训练自己的数据集并基于NVIDIA TensorRT和华为昇腾端到端模型加速
+##  Official YOLOv8 训练自己的数据集并基于NVIDIA TensorRT和华为昇腾端到端模型加速以及安卓手机端部署
 
 
 
@@ -392,6 +392,10 @@ trtexec --onnx=last_1_nms.onnx --saveEngine=yolov8s.plan --workspace=3000 --verb
 3. ATC转.om模型
 
 4. 华为昇腾C++推断
+
+### 10. QT + NCNN 小米手机端部署YOLOv8s
+
+<https://github.com/DataXujing/ncnn_android_yolov8>
 
 ### 参考文献：
 
