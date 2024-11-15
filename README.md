@@ -198,7 +198,7 @@ s 和 u 分别为分类得分和 IoU 值，α 和 β 为权重超参。从上边
 pip install ultralytics
 ```
 
-你可以在`/usr/local/lib/pythonx.x/dist-packages/ultralytics `下找到安装装宝的YOLOv8的源文件，进行魔改！
+你可以在`/usr/local/lib/pythonx.x/dist-packages/ultralytics `下找到安装包中的YOLOv8的源文件，进行魔改！
 
 ### 5.构建自己的训练集
 
